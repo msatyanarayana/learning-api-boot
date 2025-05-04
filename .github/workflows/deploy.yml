@@ -16,8 +16,9 @@ jobs:
 
       - name: Set Subscription
         run: az account set --subscription ${{ secrets.AZURE_SUBSCRIPTION_ID }
-               - name: Check Azure Subscription
-               run: az account show
+
+      - name: Check Azure Subscription
+        run: az account show
 
       - name: Checkout Repository
         uses: actions/checkout@v3
