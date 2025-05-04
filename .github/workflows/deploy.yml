@@ -26,6 +26,9 @@ jobs:
       - name: Login to ACR
         run: az acr login --name ${{ secrets.BACKEND_ACR_NAME }}
 
+      - name: Grant Execution Permission
+        run: chmod +x gradlew
+
       - name: Build Java Project
         run: ./gradlew build
 
