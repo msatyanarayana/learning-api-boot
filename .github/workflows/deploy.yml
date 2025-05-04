@@ -24,15 +24,15 @@ jobs:
             --tenant ${{ secrets.AZURE_TENANT_ID }}
 
       - name: Login to ACR
-        run: az acr login --name <BACKEND_ACR_NAME>
+        run: az acr login --name ${{ secrets.BACKEND_ACR_NAME }}
 
       - name: Build & Push Docker Image to ACR
         run: |
-          docker build -t <BACKEND_ACR_NAME>.azurecr.io/backend-app:${{ github.sha }} .
-          docker push <BACKEND_ACR_NAME>.azurecr.io/backend-app:${{ github.sha }}
+          docker build -t ${{ secrets.BACKEND_ACR_NAME }}.azurecr.io/backend-app:${{ github.sha }} .
+          docker push ${{ secrets.BACKEND_ACR_NAME }}.azurecr.io/backend-app:${{ github.sha }}
 
       - name: Deploy Container to Azure Web App
         uses: azure/webapps-deploy@v2
         with:
           app-name: 'satya-learning-backend'
-          images: '<BACKEND_ACR_NAME>.azurecr.io/backend-app:${{ github.sha }}'
+          images: ${{ secrets.BACKEND_ACR_NAME }}.azurecr.io/backend-app:${{ github.sha }}
