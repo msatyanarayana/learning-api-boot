@@ -26,6 +26,9 @@ jobs:
       - name: Login to ACR
         run: az acr login --name ${{ secrets.BACKEND_ACR_NAME }}
 
+      - name: Build Java Project
+        run: ./gradlew build
+
       - name: Build & Push Docker Image to ACR
         run: |
           docker build -t ${{ secrets.BACKEND_ACR_NAME }}.azurecr.io/backend-app:${{ github.sha }} .
