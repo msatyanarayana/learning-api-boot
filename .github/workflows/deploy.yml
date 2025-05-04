@@ -4,7 +4,9 @@ on:
   push:
     branches:
       - main  # Adjust based on your workflow
-
+permissions:
+  id-token: write
+  contents: read
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
@@ -20,6 +22,7 @@ jobs:
           tenant-id: ${{ secrets.AZURE_TENANT_ID }}
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
           client-secret: ${{ secrets.AZURE_CLIENT_SECRET }}
+          auth-type: 'ID_TOKEN'
 
       - name: Login to ACR
         run: az acr login --name <BACKEND_ACR_NAME>
