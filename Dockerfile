@@ -5,7 +5,7 @@ FROM openjdk:17
 WORKDIR /app
 
 # Copy the built JAR file into the container
-COPY target/*.jar app.jar
+COPY build/libs/*.jar app.jar
 
 # Expose the port used by Spring Boot (change if needed)
 EXPOSE 8080
